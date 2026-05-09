@@ -236,6 +236,14 @@
         lucide.createIcons();
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKEkXum_-L99ysUufPHM5oV_cA7R4dFrrh6eD8D1u0jPNCnSXOeA2IdbjnaCHYPTBrrw/exec';
 
+        // Check Authentication - Shared state with React app
+        const savedUser = localStorage.getItem('kanooz_user');
+        if (!savedUser) {
+            // Redirect to main portal for login if accessed directly
+            window.location.href = 'index.html';
+        }
+        const user = JSON.parse(savedUser);
+
         document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -256,7 +264,8 @@
                 designation: e.target.designation.value,
                 projectName: e.target.projectName.value,
                 costCenter: e.target.costCenter.value,
-                feedback: e.target.feedback.value
+                feedback: e.target.feedback.value,
+                email: user.email // Include logged in user email
             };
 
             try {
