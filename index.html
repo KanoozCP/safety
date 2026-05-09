@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback & Complaints - Kanooz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+        
+        :root {
+            --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+            --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8fafc; 
+            color: #0f172a; 
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+        @keyframes kcpGrad {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animate-kcp-gradient {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb, #f97316);
+            background-size: 200% 200%;
+            animation: kcpGrad 6s ease infinite;
+        }
+
+        .glass-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .glass-bg { 
+            background: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.6); 
+        }
+
+        .input-style { 
+            width: 100%; 
+            background: rgba(255, 255, 255, 0.5); 
+            border: 1px solid #e2e8f0; 
+            border-radius: 0.75rem; 
+            padding: 0.75rem 1rem; 
+            transition: all 0.2s; 
+            font-size: 0.875rem;
+        }
+
+        .input-style:focus { 
+            outline: none; 
+            border-color: #2563eb; 
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); 
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner { 
+            width: 1.25rem; 
+            height: 1.25rem; 
+            border: 2px solid rgba(255,255,255,0.3); 
+            border-top-color: white; 
+            border-radius: 50%; 
+            animation: spin 0.6s linear infinite; 
+            display: none; 
+        }
+
+        .watermark {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0.03;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.05] flex items-center justify-center">
+        <img src="https://lh3.googleusercontent.com/d/1oQr4RoR9ON5vK6U_oIN2hW0HdnpEloO8" alt="Watermark" style="width: 600px; max-width: 80vw;">
+    </div>
+
+    <!-- Header -->
+    <header id="mainHeader" class="glass-header">
+        <div class="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
+            <a href="https://kanooz.com/" target="_blank" class="flex items-center gap-4 group shrink-0">
+                <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz Logo" class="h-10 md:h-14 transition-transform hover:scale-105">
+            </a>
+
+            <div class="absolute left-1/2 -translate-x-1/2 w-full max-w-[280px] sm:max-w-md px-4 pointer-events-none">
+                <div class="animate-kcp-gradient p-[1px] rounded-2xl shadow-xl">
+                    <div class="bg-white/10 backdrop-blur-xl px-2 sm:px-10 py-2 sm:py-3 rounded-[15px] border border-white/20 text-center pointer-events-auto">
+                        <h1 class="text-white font-extrabold text-[10px] sm:text-lg md:text-xl tracking-tight uppercase whitespace-nowrap">
+                            Central Planning Portal
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-3xl mx-auto px-4 py-8 sm:py-12">
+        <a href="index.html" class="inline-flex items-center gap-2 text-slate-400 hover:text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-8 transition-colors group">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Portal
+        </a>
+
+        <div class="mb-8">
+            <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">Feedback & <span class="text-blue-600">Complaints</span></h2>
+            <p class="text-slate-500 font-medium text-xs sm:text-base">Site team reporting and progress feedback portal.</p>
+        </div>
+
+        <form id="feedbackForm" class="glass-bg p-5 sm:p-10 rounded-3xl shadow-xl space-y-5 sm:space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                <div class="space-y-1.5 sm:space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Full Name</label>
+                    <input type="text" name="name" required class="input-style" placeholder="Enter name">
+                </div>
+                <div class="space-y-1.5 sm:space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Badge No</label>
+                    <input type="text" name="badgeNo" required class="input-style" placeholder="K-0000">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                <div class="space-y-1.5 sm:space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Designation</label>
+                    <input type="text" name="designation" required class="input-style" placeholder="Position">
+                </div>
+                <div class="space-y-1.5 sm:space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Project Name</label>
+                    <input type="text" name="projectName" required class="input-style" placeholder="Project name">
+                </div>
+            </div>
+
+            <div class="space-y-1.5 sm:space-y-2">
+                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Cost Center</label>
+                <input type="text" name="costCenter" required class="input-style" placeholder="CC-000">
+            </div>
+
+            <div class="space-y-1.5 sm:space-y-2">
+                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Feedback & Complaints</label>
+                <textarea name="feedback" required rows="5" class="input-style" placeholder="Describe the issue or feedback..."></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn" class="w-full bg-slate-900 text-white font-black uppercase tracking-widest py-3 sm:py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-blue-600 transition-all active:scale-[0.98] shadow-lg">
+                <span id="btnText">Submit Feedback</span>
+                <div id="btnSpinner" class="spinner"></div>
+            </button>
+            <p id="successMsg" class="text-emerald-600 text-center font-bold text-sm hidden">✓ Feedback logged with Date & Time!</p>
+            <p id="errorMsg" class="text-red-500 text-center font-bold text-xs hidden">✕ Submission failed. Please try again.</p>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 sm:mt-24 border-t border-slate-200 bg-white bg-opacity-60 backdrop-blur-3xl relative z-10 w-full">
+        <div class="max-w-7xl mx-auto px-6 py-12 sm:py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 items-start">
+                
+                <!-- Contact Info -->
+                <div class="lg:col-span-5 space-y-6 sm:space-y-8">
+                    <h4 class="text-slate-900 font-black text-base sm:text-lg tracking-tight uppercase">Contact Information</h4>
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-lg">
+                                <i data-lucide="map-pin" class="w-[18px] h-[18px]"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-900 font-bold text-xs sm:text-sm leading-none mb-1">Kanooz Contracting Est</p>
+                                <p class="text-slate-500 text-[11px] sm:text-xs font-medium">Dammam, Saudi Arabia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="mailto:Info@kanooz.com" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-blue-600 bg-opacity-10 text-blue-600 flex items-center justify-center transition-all hover:bg-blue-600 hover:text-white">
+                                <i data-lucide="mail" class="w-[18px] h-[18px]"></i>
+                            </a>
+                            <div>
+                                <p class="text-slate-400 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-1">Email Us</p>
+                                <a href="mailto:Info@kanooz.com" class="text-slate-900 font-bold text-xs sm:text-sm">Info@kanooz.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="tel:+96692000043" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-emerald-500 bg-opacity-10 text-emerald-600 flex items-center justify-center transition-all hover:bg-emerald-500 hover:text-white">
+                                <i data-lucide="phone" class="w-[18px] h-[18px]"></i>
+                            </a>
+                            <div>
+                                <p class="text-slate-400 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-1">Call Support</p>
+                                <a href="tel:+96692000043" class="text-slate-900 font-bold text-xs sm:text-sm">+966 92000043</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Section -->
+                <div class="lg:col-span-7 lg:text-right flex flex-col pt-2">
+                    <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz" class="h-10 ml-auto opacity-50 grayscale hover:grayscale-0 transition-all hidden sm:block mb-6">
+                    <div class="space-y-2 sm:space-y-3">
+                        <p class="text-slate-900 font-black text-xl sm:text-2xl md:text-3xl tracking-tighter uppercase leading-tight">
+                            Central <span class="text-blue-600">Planning</span>
+                        </p>
+                        <p class="text-slate-500 text-xs sm:text-sm max-w-sm ml-auto leading-relaxed font-medium">
+                            Advancing industrial excellence through strategic resource allocation and comprehensive equipment tracking.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 sm:mt-16 pt-8 border-t border-slate-200 border-opacity-50 flex flex-col items-center justify-center text-center gap-4 sm:gap-6">
+                <p class="text-slate-400 text-[10px] sm:text-xs font-medium">© 2026 Kanooz – Central Planning. All Rights Reserved.</p>
+                <span class="text-[9px] sm:text-[10px] font-bold text-slate-300 uppercase tracking-[0.2em] px-4 py-1.5 border border-slate-200 rounded-full cursor-default hover:border-slate-300 transition-colors">
+                    System Version 1.0.2
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKEkXum_-L99ysUufPHM5oV_cA7R4dFrrh6eD8D1u0jPNCnSXOeA2IdbjnaCHYPTBrrw/exec';
+
+        document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const spinner = document.getElementById('btnSpinner');
+            const btnText = document.getElementById('btnText');
+            const successMsg = document.getElementById('successMsg');
+            const errorMsg = document.getElementById('errorMsg');
+
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+            successMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+
+            const formData = {
+                name: e.target.name.value,
+                badgeNo: e.target.badgeNo.value,
+                designation: e.target.designation.value,
+                projectName: e.target.projectName.value,
+                costCenter: e.target.costCenter.value,
+                feedback: e.target.feedback.value
+            };
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(formData)
+                });
+                
+                successMsg.classList.remove('hidden');
+                e.target.reset();
+                setTimeout(() => { 
+                    window.location.href = 'index.html';
+                }, 3000);
+            } catch (err) {
+                errorMsg.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btnText.style.display = 'block';
+                spinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
