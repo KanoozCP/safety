@@ -10,6 +10,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
         
+        :root {
+            --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+            --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+        }
+
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #f8fafc; 
@@ -35,12 +40,11 @@
         .glass-header {
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 50;
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.3s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
         .glass-bg { 
@@ -75,6 +79,18 @@
             animation: spin 0.6s linear infinite; 
             display: none; 
         }
+
+        .watermark {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0.03;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -82,10 +98,10 @@
         <img src="https://lh3.googleusercontent.com/d/1oQr4RoR9ON5vK6U_oIN2hW0HdnpEloO8" alt="Watermark" style="width: 600px; max-width: 80vw;">
     </div>
 
-    <!-- Header (Matching Portal) -->
+    <!-- Header -->
     <header id="mainHeader" class="glass-header">
         <div class="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
-            <a href="https://kanooz.com/" target="_blank" class="flex items-center gap-4 group shrink-0">
+            <a href="https://kanoozcp.github.io/" target="_blank" class="flex items-center gap-4 group shrink-0">
                 <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz Logo" class="h-10 md:h-14 transition-transform hover:scale-105">
             </a>
 
@@ -109,7 +125,7 @@
 
         <div class="mb-8">
             <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">Feedback & <span class="text-blue-600">Complaints</span></h2>
-            <p class="text-slate-500 font-medium text-xs sm:text-base">Site team reporting and progress feedback portal.</p>
+            <p class="text-slate-500 font-medium text-xs sm:text-base">Project team feedback portal.</p>
         </div>
 
         <form id="feedbackForm" class="glass-bg p-5 sm:p-10 rounded-3xl shadow-xl space-y-5 sm:space-y-6">
@@ -120,7 +136,7 @@
                 </div>
                 <div class="space-y-1.5 sm:space-y-2">
                     <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Badge No</label>
-                    <input type="text" name="badgeNo" required class="input-style" placeholder="K-0000">
+                    <input type="text" name="badgeNo" required class="input-style" placeholder="2XXX, 3XXX, GH-XXX, QV-XXXX etc. ">
                 </div>
             </div>
 
@@ -137,7 +153,12 @@
 
             <div class="space-y-1.5 sm:space-y-2">
                 <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Cost Center</label>
-                <input type="text" name="costCenter" required class="input-style" placeholder="CC-000">
+                <input type="text" name="costCenter" required class="input-style" placeholder="KNZXX-XXXXXX">
+            </div>
+
+            <div class="space-y-1.5 sm:space-y-2">
+                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Contact Mobile / Email</label>
+                <input type="text" name="contact" required class="input-style" placeholder="Mobile no or Email ID">
             </div>
 
             <div class="space-y-1.5 sm:space-y-2">
@@ -154,49 +175,64 @@
         </form>
     </main>
 
-    <!-- Footer (Matching Portal) -->
-    <footer class="mt-20 border-t border-slate-200 bg-white/40 backdrop-blur-3xl relative z-10 w-full px-4">
-        <div class="max-w-7xl mx-auto px-6 py-16">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div class="lg:col-span-5 space-y-6">
-                    <div class="space-y-4">
-                        <h4 class="text-slate-900 font-black text-lg tracking-tight uppercase">Contact Information</h4>
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-lg"><i data-lucide="map-pin"></i></div>
-                                <div>
-                                    <p class="text-slate-900 font-bold text-sm mb-1">Kanooz Contracting Est</p>
-                                    <p class="text-slate-500 text-xs font-medium">Dammam, Kingdom of Saudi Arabia</p>
-                                </div>
+    <!-- Footer -->
+    <footer class="mt-16 sm:mt-24 border-t border-slate-200 bg-white bg-opacity-60 backdrop-blur-3xl relative z-10 w-full">
+        <div class="max-w-7xl mx-auto px-6 py-12 sm:py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 items-start">
+                
+                <!-- Contact Info -->
+                <div class="lg:col-span-5 space-y-6 sm:space-y-8">
+                    <h4 class="text-slate-900 font-black text-base sm:text-lg tracking-tight uppercase">Contact Information</h4>
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-lg">
+                                <i data-lucide="map-pin" class="w-[18px] h-[18px]"></i>
                             </div>
-                            <div class="flex items-center gap-4">
-                                <a href="mailto:Info@kanooz.com" class="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center"><i data-lucide="mail"></i></a>
-                                <div>
-                                    <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Email Us</p>
-                                    <a href="mailto:Info@kanooz.com" class="text-slate-900 font-bold text-sm">Info@kanooz.com</a>
-                                </div>
+                            <div>
+                                <p class="text-slate-900 font-bold text-xs sm:text-sm leading-none mb-1">Kanooz Contracting Est</p>
+                                <p class="text-slate-500 text-[11px] sm:text-xs font-medium">Dammam, Saudi Arabia</p>
                             </div>
-                            <div class="flex items-center gap-4">
-                                <a href="tel:+96692000043" class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center"><i data-lucide="phone"></i></a>
-                                <div>
-                                    <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Call Support</p>
-                                    <a href="tel:+96692000043" class="text-slate-900 font-bold text-sm">+966 92000043</a>
-                                </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="mailto:Info@kanooz.com" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-blue-600 bg-opacity-10 text-blue-600 flex items-center justify-center transition-all hover:bg-blue-600 hover:text-white">
+                                <i data-lucide="mail" class="w-[18px] h-[18px]"></i>
+                            </a>
+                            <div>
+                                <p class="text-slate-400 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-1">Email Us</p>
+                                <a href="mailto:Info@kanooz.com" class="text-slate-900 font-bold text-xs sm:text-sm">Info@kanooz.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="tel:+96692000043" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-emerald-500 bg-opacity-10 text-emerald-600 flex items-center justify-center transition-all hover:bg-emerald-500 hover:text-white">
+                                <i data-lucide="phone" class="w-[18px] h-[18px]"></i>
+                            </a>
+                            <div>
+                                <p class="text-slate-400 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-1">Call Support</p>
+                                <a href="tel:+96692000043" class="text-slate-900 font-bold text-xs sm:text-sm">+966 92000043</a>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- About Section -->
                 <div class="lg:col-span-7 lg:text-right flex flex-col pt-2">
-                    <div class="space-y-4">
-                        <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz" class="h-10 ml-auto opacity-50 grayscale">
-                        <p class="text-slate-900 font-black text-xl tracking-tighter uppercase">Central <span class="text-blue-600">Planning</span></p>
-                        <p class="text-slate-500 text-sm max-w-md ml-auto leading-relaxed">Industrial excellence through Project tracking and resource allocation.</p>
+                    <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz" class="h-10 ml-auto opacity-50 grayscale hover:grayscale-0 transition-all hidden sm:block mb-6">
+                    <div class="space-y-2 sm:space-y-3">
+                        <p class="text-slate-900 font-black text-xl sm:text-2xl md:text-3xl tracking-tighter uppercase leading-tight">
+                            Central <span class="text-blue-600">Planning</span>
+                        </p>
+                        <p class="text-slate-500 text-xs sm:text-sm max-w-sm ml-auto leading-relaxed font-medium">
+                            Advancing industrial excellence through strategic resource allocation and comprehensive equipment tracking.
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="mt-16 pt-8 border-t border-slate-200/50 text-center gap-4">
-                <p class="text-slate-400 text-xs font-medium">© 2026 Kanooz – Central Planning. All Rights Reserved.</p>
-                <span class="text-[10px] font-bold text-slate-300 uppercase tracking-[0.2em] px-3 py-1 border border-slate-200 rounded-full inline-block mt-4">System Version 1.0.0</span>
+
+            <div class="mt-12 sm:mt-16 pt-8 border-t border-slate-200 border-opacity-50 flex flex-col items-center justify-center text-center gap-4 sm:gap-6">
+                <p class="text-slate-400 text-[10px] sm:text-xs font-medium">© 2026 Kanooz – Central Planning. All Rights Reserved.</p>
+                <span class="text-[9px] sm:text-[10px] font-bold text-slate-300 uppercase tracking-[0.2em] px-4 py-1.5 border border-slate-200 rounded-full cursor-default hover:border-slate-300 transition-colors">
+                    System Version 1.0.0
+                </span>
             </div>
         </div>
     </footer>
@@ -204,13 +240,6 @@
     <script>
         lucide.createIcons();
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKEkXum_-L99ysUufPHM5oV_cA7R4dFrrh6eD8D1u0jPNCnSXOeA2IdbjnaCHYPTBrrw/exec';
-
-        // AUTHENTICATION CHECK
-        const savedUser = localStorage.getItem('kanooz_user');
-        if (!savedUser) {
-            window.location.href = 'index.html'; // Redirect to login if not authenticated
-        }
-        const user = JSON.parse(savedUser);
 
         document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -223,6 +252,8 @@
             btn.disabled = true;
             btnText.style.display = 'none';
             spinner.style.display = 'block';
+            successMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
 
             const formData = {
                 name: e.target.name.value,
@@ -231,7 +262,7 @@
                 projectName: e.target.projectName.value,
                 costCenter: e.target.costCenter.value,
                 feedback: e.target.feedback.value,
-                email: user.email // Capturing the logged in user's email
+                contact: e.target.contact.value
             };
 
             try {
@@ -243,7 +274,9 @@
                 
                 successMsg.classList.remove('hidden');
                 e.target.reset();
-                setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                setTimeout(() => { 
+                    window.location.href = 'index.html';
+                }, 3000);
             } catch (err) {
                 errorMsg.classList.remove('hidden');
             } finally {
