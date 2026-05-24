@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback & Complaints - Kanooz</title>
+    
+    <!-- Modern Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS 4 -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
-        
         :root {
-            --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-            --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+            --kcp-indigo: #1e3a8a;
+            --kcp-blue: #2563eb;
+            --kcp-orange: #f97316;
+            --kcp-gradient: linear-gradient(135deg, #1e3a8a, #2563eb, #f97316);
         }
 
         body { 
@@ -32,7 +39,7 @@
         }
 
         .animate-kcp-gradient {
-            background: linear-gradient(135deg, #1e3a8a, #2563eb, #f97316);
+            background: var(--kcp-gradient);
             background-size: 200% 200%;
             animation: kcpGrad 6s ease infinite;
         }
@@ -40,11 +47,16 @@
         .glass-header {
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 1000;
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
         }
 
         .glass-bg { 
@@ -79,21 +91,10 @@
             animation: spin 0.6s linear infinite; 
             display: none; 
         }
-
-        .watermark {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-            opacity: 0.03;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
     </style>
 </head>
 <body>
+    <!-- Background Elements -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.05] flex items-center justify-center">
         <img src="https://lh3.googleusercontent.com/d/1oQr4RoR9ON5vK6U_oIN2hW0HdnpEloO8" alt="Watermark" style="width: 600px; max-width: 80vw;">
     </div>
@@ -107,25 +108,30 @@
 
             <div class="absolute left-1/2 -translate-x-1/2">
                 <div class="animate-kcp-gradient p-[1px] rounded-2xl shadow-xl">
-                    <div class="bg-white/10 backdrop-blur-xl px-10 py-3 rounded-[15px] border border-white/20 text-center">
-                        <h1 class="text-white font-extrabold text-xl tracking-tight uppercase whitespace-nowrap">
+                    <div class="bg-white/10 backdrop-blur-xl px-4 md:px-10 py-3 rounded-[15px] border border-white/20 text-center">
+                        <h1 class="text-white font-extrabold text-sm md:text-xl tracking-tight uppercase whitespace-nowrap">
                             Central Planning Portal
                         </h1>
                     </div>
                 </div>
             </div>
+
+            <!-- Standalone back button indicator -->
+            <div>
+                <a href="https://kanoozcp.github.io/" class="inline-flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-600 transition-all rounded-xl text-xs md:text-sm font-bold shadow-sm">
+                    <i data-lucide="home" style="width:16px;height:16px"></i>
+                    <span>Back to Portal</span>
+                </a>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="relative z-10 max-w-3xl mx-auto px-4 py-8 sm:py-12">
-        <a href="https://kanoozcp.github.io/" class="inline-flex items-center gap-2 text-slate-400 hover:text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-8 transition-colors group">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Portal
-        </a>
-
-        <div class="mb-8">
+    <main class="relative z-10 max-w-3xl mx-auto px-6 py-8 sm:py-12 min-h-[calc(100vh-176px)] flex flex-col justify-center">
+        <!-- Welcoming block -->
+        <div class="mb-8 text-left">
             <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">Feedback & <span class="text-blue-600">Complaints</span></h2>
-            <p class="text-slate-500 font-medium text-xs sm:text-base">Project team feedback portal.</p>
+            <p class="text-slate-500 font-medium text-xs sm:text-base mt-2">Project team feedback portal.</p>
         </div>
 
         <form id="feedbackForm" class="glass-bg p-5 sm:p-10 rounded-3xl shadow-xl space-y-5 sm:space-y-6">
@@ -175,11 +181,12 @@
         </form>
     </main>
 
-<!-- Refined Reduced Footer -->
-    <footer class="border-t border-slate-200/60 bg-white/30 backdrop-blur-3xl relative z-10 w-full">
+    <!-- Footer same as previous page -->
+    <footer class="mt-12 border-t border-slate-200/60 bg-white/30 backdrop-blur-3xl relative z-10 w-full">
         <div class="max-w-7xl mx-auto px-6 py-4 md:py-6">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 
+                <!-- Contact Icons Row -->
                 <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-3">
                     <div class="flex items-center gap-2 group cursor-default">
                         <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i>
@@ -197,16 +204,19 @@
                     </a>
                 </div>
 
+                <!-- Copyright & Logo -->
                 <div class="flex items-center gap-6">
                     <div class="flex items-center gap-3">
-                        <p class="text-slate-400 text-[10px] font-medium">
+                        <p class="text-slate-400 text-[10px] font-medium select-none">
                             © 2026 Kanooz Central Planning.
                         </p>
                         <span class="text-[8px] font-bold text-slate-300 uppercase tracking-[0.2em] px-2 py-0.5 border border-slate-200 rounded-full select-none">
                             v1.0.0
                         </span>
                     </div>
-                    <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz" class="h-8 opacity-40 grayscale hover:grayscale-0 transition-opacity">
+                    <a href="https://kanooz-central-planning-35103598616.asia-south1.run.app/" target="_blank" rel="noopener noreferrer" class="inline-block">
+                        <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz" class="h-8 opacity-40 grayscale hover:grayscale-0 transition-opacity">
+                    </a>
                 </div>
             </div>
         </div>
@@ -259,6 +269,27 @@
                 btnText.style.display = 'block';
                 spinner.style.display = 'none';
             }
+        });
+
+        // Header scroll effect
+        let lastScroll = 0;
+        const header = document.getElementById('mainHeader');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) {
+                header.classList.remove('header-hidden');
+                return;
+            }
+
+            if (currentScroll > lastScroll && !header.classList.contains('header-hidden')) {
+                // Scroll down
+                header.classList.add('header-hidden');
+            } else if (currentScroll < lastScroll && header.classList.contains('header-hidden')) {
+                // Scroll up
+                header.classList.remove('header-hidden');
+            }
+            lastScroll = currentScroll;
         });
     </script>
 </body>
