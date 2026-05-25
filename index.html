@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback & Complaints - Kanooz</title>
+    <title>Report Safety Observation - Kanooz</title>
     
     <!-- Modern Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
@@ -129,9 +129,87 @@
     <!-- Main Content -->
     <main class="relative z-10 max-w-3xl mx-auto px-6 py-8 sm:py-12 min-h-[calc(100vh-176px)] flex flex-col justify-center">
         <!-- Welcoming block -->
-        <div class="mb-8 text-left">
-            <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">Feedback & <span class="text-blue-600">Complaints</span></h2>
-            <p class="text-slate-500 font-medium text-xs sm:text-base mt-2">Project team feedback portal.</p>
+        <div class="mb-8 text-left flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-600 shrink-0">
+                <i data-lucide="shield-alert" class="w-6 h-6"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">Report <span class="text-rose-600">Safety Observation</span></h2>
+                <p class="text-slate-500 font-medium text-xs sm:text-base mt-1">Safety First — Report unsafe conditions, near misses, or active incidents.</p>
+            </div>
+        </div>
+
+        <!-- Emergency Services Quick Contacts -->
+        <div class="mb-8 bg-gradient-to-br from-red-50 to-orange-50/50 border border-red-100 rounded-3xl p-5 sm:p-6 shadow-sm">
+            <div class="flex items-center gap-2 mb-3.5 pb-2 border-b border-red-100/60">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></div>
+                <h3 class="text-xs font-black text-red-700 uppercase tracking-widest">Emergency Services & Contacts (KSA)</h3>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <a href="tel:999" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                        <i data-lucide="shield" style="width:16px;height:16px"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Police</span>
+                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-blue-600 transition-colors">999</span>
+                    </div>
+                </a>
+                <a href="tel:997" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
+                        <i data-lucide="heart-pulse" style="width:16px;height:16px"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Ambulance</span>
+                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-red-600 transition-colors">997</span>
+                    </div>
+                </a>
+                <a href="tel:998" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600">
+                        <i data-lucide="flame" style="width:16px;height:16px"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Civil Defense</span>
+                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-orange-600 transition-colors">998</span>
+                    </div>
+                </a>
+                <a href="tel:112" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600">
+                        <i data-lucide="phone" style="width:16px;height:16px"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">General (No SIM)</span>
+                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-slate-600 transition-colors">112</span>
+                    </div>
+                </a>
+                <a href="tel:993" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
+                        <i data-lucide="car" style="width:16px;height:16px"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Traffic (Najm)</span>
+                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-amber-600 transition-colors">993</span>
+                    </div>
+                </a>
+                <a href="tel:996" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 border border-emerald-100/20">
+                        <i data-lucide="shield-alert" style="width:16px;height:16px"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Road Security</span>
+                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-emerald-600 transition-colors">996</span>
+                    </div>
+                </a>
+                <a href="tel:+96692000043" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all col-span-2 group">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center text-red-600 shrink-0">
+                        <i data-lucide="phone" style="width:16px;height:16px"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Kanooz Emergency Desk</span>
+                        <span class="font-extrabold text-xs sm:text-sm text-slate-800 group-hover:text-rose-600 transition-colors">+966 92000043</span>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <form id="feedbackForm" class="glass-bg p-5 sm:p-10 rounded-3xl shadow-xl space-y-5 sm:space-y-6">
@@ -157,27 +235,51 @@
                 </div>
             </div>
 
-            <div class="space-y-1.5 sm:space-y-2">
-                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Cost Center</label>
-                <input type="text" name="costCenter" required class="input-style" placeholder="KNZXX-XXXXXX">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                <div class="space-y-1.5 sm:space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Cost Center</label>
+                    <input type="text" name="costCenter" required class="input-style" placeholder="KNZXX-XXXXXX">
+                </div>
+                <div class="space-y-1.5 sm:space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Contact Mobile / Email</label>
+                    <input type="text" name="contact" required class="input-style" placeholder="Mobile no or Email ID">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                <div class="space-y-1.5 sm:space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Type of Event / Observation</label>
+                    <select name="eventType" required class="input-style bg-white/50 cursor-pointer">
+                        <option value="Observation">Observation</option>
+                        <option value="Near miss">Near miss</option>
+                        <option value="LTI">LTI (Lost Time Injury)</option>
+                        <option value="Fatality">Fatality</option>
+                        <option value="First Aid Injury">First Aid Injury</option>
+                        <option value="Property Damage">Property Damage</option>
+                        <option value="Environmental Spill">Environmental Spill / Incident</option>
+                        <option value="Other">Other Safety Observation</option>
+                    </select>
+                </div>
+                <div class="space-y-1.5 sm:space-y-2">
+                    <label class="text-[8.5px] sm:text-[9.5px] font-black text-slate-400 uppercase tracking-wider block pl-1 truncate">Supervisor or Client Emergency Team Notified?</label>
+                    <select name="informedEmergency" required class="input-style bg-white/50 cursor-pointer">
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
             </div>
 
             <div class="space-y-1.5 sm:space-y-2">
-                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Contact Mobile / Email</label>
-                <input type="text" name="contact" required class="input-style" placeholder="Mobile no or Email ID">
+                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Description of Safety Observation / Event</label>
+                <textarea name="feedback" required rows="5" class="input-style resize-none" placeholder="Describe the unsafe act, near miss, unsafe condition, or safety event in detail..."></textarea>
             </div>
 
-            <div class="space-y-1.5 sm:space-y-2">
-                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Feedback & Complaints</label>
-                <textarea name="feedback" required rows="5" class="input-style" placeholder="Describe the issue or feedback..."></textarea>
-            </div>
-
-            <button type="submit" id="submitBtn" class="w-full bg-slate-900 text-white font-black uppercase tracking-widest py-3 sm:py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-blue-600 transition-all active:scale-[0.98] shadow-lg">
-                <span id="btnText">Submit Feedback</span>
+            <button type="submit" id="submitBtn" class="w-full bg-slate-900 text-white font-black uppercase tracking-widest py-3 sm:py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-rose-600 transition-all active:scale-[0.98] shadow-lg">
+                <span id="btnText">Submit Safety Report</span>
                 <div id="btnSpinner" class="spinner"></div>
             </button>
-            <p id="successMsg" class="text-emerald-600 text-center font-bold text-sm hidden">✓ Feedback logged with Date & Time!</p>
-            <p id="errorMsg" class="text-red-500 text-center font-bold text-xs hidden">✕ Submission failed. Please try again.</p>
+            <p id="successMsg" class="text-emerald-600 text-center font-bold text-sm hidden">✓ Safety Observation Report submitted successfully</p>
+            <p id="errorMsg" class="text-red-500 text-center font-bold text-xs hidden">✕ Submission failed. Please try again or report directly to HSE team.</p>
         </form>
     </main>
 
@@ -240,14 +342,49 @@
             successMsg.classList.add('hidden');
             errorMsg.classList.add('hidden');
 
+            const eventType = e.target.eventType.value;
+            const informedEmergency = e.target.informedEmergency.value;
+            const userFeedback = e.target.feedback.value;
+
             const formData = {
+                // Original legacy keys (for legacy/hardcoded scripts)
                 name: e.target.name.value,
                 badgeNo: e.target.badgeNo.value,
                 designation: e.target.designation.value,
                 projectName: e.target.projectName.value,
                 costCenter: e.target.costCenter.value,
-                feedback: e.target.feedback.value,
-                contact: e.target.contact.value
+                eventType: eventType,
+                informedEmergency: informedEmergency,
+                feedback: userFeedback,
+                contact: e.target.contact.value,
+
+                // Exact column header matches (both standard casing and simple casing)
+                "Type of Event / Observation": eventType,
+                "typeofeventobservation": eventType,
+                "Type": eventType,
+                
+                "Supervisor or Client Emergency Team Notified?": informedEmergency,
+                "supervisororclientemergencyteamnotified?": informedEmergency,
+                "Supervisor or Client Emergency Team Notified": informedEmergency,
+                "Informed Emergency": informedEmergency,
+                "Notified": informedEmergency,
+
+                // Textual description / feedback keys
+                "Feedback & Complaint": userFeedback,
+                "Feedback & Complaints": userFeedback,
+                "Feedback / Complaints": userFeedback,
+                "Description of Safety Observation / Event": userFeedback,
+
+                // Additional human-readable header matches for resilience
+                "Full Name": e.target.name.value,
+                "Name": e.target.name.value,
+                "Badge No": e.target.badgeNo.value,
+                "Badge No.": e.target.badgeNo.value,
+                "Designation": e.target.designation.value,
+                "Project Name": e.target.projectName.value,
+                "Cost Center": e.target.costCenter.value,
+                "Contact Mobile / Email": e.target.contact.value,
+                "Mobile No/ Email": e.target.contact.value
             };
 
             try {
