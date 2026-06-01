@@ -93,15 +93,15 @@
         }
     </style>
 </head>
-<body>
-    <!-- Background Elements -->
-    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.05] flex items-center justify-center">
+<body class="flex flex-col min-h-screen">
+    <!-- Background Watermark -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.04] flex items-center justify-center">
         <img src="https://lh3.googleusercontent.com/d/1oQr4RoR9ON5vK6U_oIN2hW0HdnpEloO8" alt="Watermark" style="width: 600px; max-width: 80vw;">
     </div>
 
     <!-- Header -->
     <header id="mainHeader" class="glass-header">
-        <div class="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-6 class-bg h-20 md:h-24 flex items-center justify-between">
             <a href="https://kanooz.com/" target="_blank" class="flex items-center gap-4 group">
                 <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz Logo" class="h-10 md:h-14 transition-transform group-hover:scale-105">
             </a>
@@ -116,7 +116,6 @@
                 </div>
             </div>
 
-            <!-- Standalone back button indicator -->
             <div>
                 <a href="https://kanoozcp.github.io/" class="inline-flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-600 transition-all rounded-xl text-xs md:text-sm font-bold shadow-sm">
                     <i data-lucide="home" style="width:16px;height:16px"></i>
@@ -127,163 +126,431 @@
     </header>
 
     <!-- Main Content -->
-    <main class="relative z-10 max-w-3xl mx-auto px-6 py-8 sm:py-12 min-h-[calc(100vh-176px)] flex flex-col justify-center">
-        <!-- Welcoming block -->
+    <main class="relative z-10 max-w-4xl mx-auto px-6 py-8 sm:py-12 flex-grow w-full">
         <div class="mb-8 text-left flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-600 shrink-0">
                 <i data-lucide="shield-alert" class="w-6 h-6"></i>
             </div>
             <div>
-                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">Report <span class="text-rose-600">Safety Observation</span></h2>
-                <p class="text-slate-500 font-medium text-xs sm:text-base mt-1">Safety First — Report unsafe conditions, near misses, or active incidents.</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Report <span class="text-rose-600">Safety Observation</span></h2>
+                <p class="text-slate-500 font-medium text-xs sm:text-sm mt-1">HSE Safety First — Report unsafe acts, conditions, or protective actions.</p>
             </div>
         </div>
 
-        <!-- Emergency Services Quick Contacts -->
-        <div class="mb-8 bg-gradient-to-br from-red-50 to-orange-50/50 border border-red-100 rounded-3xl p-5 sm:p-6 shadow-sm">
-            <div class="flex items-center gap-2 mb-3.5 pb-2 border-b border-red-100/60">
-                <div class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></div>
-                <h3 class="text-xs font-black text-red-700 uppercase tracking-widest">Emergency Services & Contacts (KSA)</h3>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <a href="tel:999" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
-                    <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                        <i data-lucide="shield" style="width:16px;height:16px"></i>
+        <!-- Form Container -->
+        <form id="feedbackForm" class="bg-white/70 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-slate-100 shadow-xl space-y-6">
+            
+            <!-- Section 1: General & Location Info -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                    <div class="w-5 h-5 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                        <i data-lucide="map-pin" style="width:14px;height:14px"></i>
                     </div>
-                    <div>
-                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Police</span>
-                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-blue-600 transition-colors">999</span>
+                    <h3 class="text-xs font-black text-slate-700 uppercase tracking-widest">
+                        1. General & Site Location Information
+                    </h3>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Date Input -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Date (dd-mmm-yy) <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="date" 
+                                name="date" 
+                                required 
+                                id="dateInput"
+                                class="input-style pr-10" 
+                            >
+                            <i data-lucide="calendar" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                        </div>
+                        <span id="formattedDateLabel" class="text-[10px] text-blue-600 font-semibold pl-1 hidden"></span>
                     </div>
-                </a>
-                <a href="tel:997" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
-                    <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
-                        <i data-lucide="heart-pulse" style="width:16px;height:16px"></i>
-                    </div>
-                    <div>
-                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Ambulance</span>
-                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-red-600 transition-colors">997</span>
-                    </div>
-                </a>
-                <a href="tel:998" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
-                    <div class="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600">
-                        <i data-lucide="flame" style="width:16px;height:16px"></i>
-                    </div>
-                    <div>
-                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Civil Defense</span>
-                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-orange-600 transition-colors">998</span>
-                    </div>
-                </a>
-                <a href="tel:112" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
-                    <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600">
-                        <i data-lucide="phone" style="width:16px;height:16px"></i>
-                    </div>
-                    <div>
-                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">General (No SIM)</span>
-                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-slate-600 transition-colors">112</span>
-                    </div>
-                </a>
-                <a href="tel:993" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
-                    <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
-                        <i data-lucide="car" style="width:16px;height:16px"></i>
-                    </div>
-                    <div>
-                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Traffic (Najm)</span>
-                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-amber-600 transition-colors">993</span>
-                    </div>
-                </a>
-                <a href="tel:996" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all group">
-                    <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 border border-emerald-100/20">
-                        <i data-lucide="shield-alert" style="width:16px;height:16px"></i>
-                    </div>
-                    <div>
-                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Road Security</span>
-                        <span class="font-extrabold text-sm text-slate-800 group-hover:text-emerald-600 transition-colors">996</span>
-                    </div>
-                </a>
-                <a href="tel:+96692000043" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/80 hover:bg-white hover:shadow-sm border border-red-100/30 transition-all col-span-2 group">
-                    <div class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center text-red-600 shrink-0">
-                        <i data-lucide="phone" style="width:16px;height:16px"></i>
-                    </div>
-                    <div>
-                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Kanooz Emergency Desk</span>
-                        <span class="font-extrabold text-xs sm:text-sm text-slate-800 group-hover:text-rose-600 transition-colors">+966 92000043</span>
-                    </div>
-                </a>
-            </div>
-        </div>
 
-        <form id="feedbackForm" class="glass-bg p-5 sm:p-10 rounded-3xl shadow-xl space-y-5 sm:space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-                <div class="space-y-1.5 sm:space-y-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Name</label>
-                    <input type="text" name="name" required class="input-style" placeholder="Name">
-                </div>
-                <div class="space-y-1.5 sm:space-y-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Badge No</label>
-                    <input type="text" name="badgeNo" required class="input-style" placeholder="2XXX, 3XXX, GH-XXX, QV-XXXX etc. ">
-                </div>
-            </div>
+                    <!-- Time Input -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Time (24 Hrs or AM/PM) <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                name="time" 
+                                required 
+                                class="input-style" 
+                                placeholder="e.g. 14:30 or 02:30 PM" 
+                            >
+                            <i data-lucide="clock" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                        </div>
+                    </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-                <div class="space-y-1.5 sm:space-y-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Designation</label>
-                    <input type="text" name="designation" required class="input-style" placeholder="Position">
+                    <!-- Shift select -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Shift <span class="text-red-500">*</span>
+                        </label>
+                        <select
+                            name="shift"
+                            required
+                            class="input-style bg-white/50 cursor-pointer"
+                        >
+                            <option value="Day">Day</option>
+                            <option value="Night">Night</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="space-y-1.5 sm:space-y-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Project Name</label>
-                    <input type="text" name="projectName" required class="input-style" placeholder="Project Title">
-                </div>
-            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-                <div class="space-y-1.5 sm:space-y-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Cost Center</label>
-                    <input type="text" name="costCenter" required class="input-style" placeholder="KNZXX-XXXXXX">
-                </div>
-                <div class="space-y-1.5 sm:space-y-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Contact Mobile / Email</label>
-                    <input type="text" name="contact" required class="input-style" placeholder="Mobile No or Email ID">
-                </div>
-            </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Plant -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Plant <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="plant" 
+                            required 
+                            class="input-style" 
+                            placeholder="e.g. Aramco, Sabic, Others" 
+                        >
+                    </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-                <div class="space-y-1.5 sm:space-y-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Type of Event / Observation</label>
-                    <select name="eventType" required class="input-style bg-white/50 cursor-pointer">
-                        <option value="Observation">Observation</option>
-                        <option value="Near miss">Near miss</option>
-                        <option value="LTI">LTI (Lost Time Injury)</option>
-                        <option value="Fatality">Fatality</option>
-                        <option value="First Aid Injury">First Aid Injury</option>
-                        <option value="Property Damage">Property Damage</option>
-                        <option value="Environmental Spill">Environmental Spill / Incident</option>
-                        <option value="Other">Other Safety Observation</option>
-                    </select>
-                </div>
-                <div class="space-y-1.5 sm:space-y-2">
-                    <label class="text-[8.5px] sm:text-[9.5px] font-black text-slate-400 uppercase tracking-wider block pl-1 truncate">Supervisor or Client Emergency Team Notified?</label>
-                    <select name="informedEmergency" required class="input-style bg-white/50 cursor-pointer">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                    </select>
+                    <!-- Cost Center -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-450 uppercase tracking-widest block pl-1">
+                            Cost Center <span class="text-slate-400 text-[8.5px] font-medium italic">(Optional)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="costCenter" 
+                            class="input-style border-slate-200/80" 
+                            placeholder="e.g. KNZXX-XXXXXX" 
+                        >
+                    </div>
+
+                    <!-- Location -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Location <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="location" 
+                            required 
+                            class="input-style" 
+                            placeholder="Specific Area/Unit" 
+                        >
+                    </div>
                 </div>
             </div>
 
-            <div class="space-y-1.5 sm:space-y-2">
-                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-1">Description of Safety Observation / Event</label>
-                <textarea name="feedback" required rows="5" class="input-style resize-none" placeholder="Describe the unsafe act, near miss, unsafe condition, or safety event in detail..."></textarea>
+            <!-- Section 2: Safety Classification & Details -->
+            <div class="space-y-4 pt-2">
+                <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                    <div class="w-5 h-5 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+                        <i data-lucide="tag" style="width:14px;height:14px"></i>
+                    </div>
+                    <h3 class="text-xs font-black text-slate-700 uppercase tracking-widest">
+                        2. Safety Observation Classification & Specifics
+                    </h3>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    <!-- Observation Type select -->
+                    <div class="space-y-1.5 sm:col-span-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Observation Type <span class="text-red-500">*</span>
+                        </label>
+                        <select
+                            name="observationType"
+                            required
+                            class="input-style bg-white/50 cursor-pointer"
+                        >
+                            <option value="Unsafe Act">Unsafe Act</option>
+                            <option value="Unsafe Condition">Unsafe Condition</option>
+                            <option value="Nearmiss">Nearmiss</option>
+                            <option value="Incident">Incident</option>
+                            <option value="Good Observation">Good Observation</option>
+                        </select>
+                    </div>
+
+                    <!-- Observation Category select -->
+                    <div class="space-y-1.5 sm:col-span-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Observation Category <span class="text-red-500">*</span>
+                        </label>
+                        <select
+                            name="observationCategory"
+                            required
+                            class="input-style bg-white/50 cursor-pointer"
+                        >
+                            <option value="Access">Access</option>
+                            <option value="Site & procedures">Site & procedures</option>
+                            <option value="Fire Hazards / Hot Work">Fire Hazards / Hot Work</option>
+                            <option value="PPE's">PPE's</option>
+                            <option value="Material Handling & Storage">Material Handling & Storage</option>
+                            <option value="Machinery & Equipment">Machinery & Equipment</option>
+                            <option value="Hand Tools">Hand Tools</option>
+                            <option value="Electrical">Electrical</option>
+                            <option value="Confined Space & Procedure">Confined Space & Procedure</option>
+                            <option value="Lifting Euip & Procedure">Lifting Euip & Procedure</option>
+                            <option value="Work at Height / Fall Hazards">Work at Height / Fall Hazards</option>
+                            <option value="Scaffolding">Scaffolding</option>
+                            <option value="Environmental Hazard">Environmental Hazard</option>
+                            <option value="Housekeeping">Housekeeping</option>
+                            <option value="High Pressure Hazard">High Pressure Hazard</option>
+                            <option value="Work Permit & Supporting Doc">Work Permit & Supporting Doc</option>
+                            <option value="Good Observation">Good Observation</option>
+                            <option value="Illumination">Illumination</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+
+                    <!-- Criticality Select -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Criticality <span class="text-red-500">*</span>
+                        </label>
+                        <select
+                            name="criticality"
+                            required
+                            id="criticalitySelect"
+                            class="input-style bg-white/50 cursor-pointer font-bold text-yellow-500"
+                        >
+                            <option value="Critical" class="text-slate-900 font-normal bg-white">Critical</option>
+                            <option value="High" class="text-slate-900 font-normal bg-white">High</option>
+                            <option value="Medium" class="text-slate-900 font-normal bg-white" selected>Medium</option>
+                            <option value="Low" class="text-slate-900 font-normal bg-white">Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Target Date -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Target Date <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="date" 
+                                name="targetDate" 
+                                required 
+                                id="targetDateInput"
+                                class="input-style pr-10" 
+                            >
+                            <i data-lucide="calendar" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                        </div>
+                        <span id="formattedTargetDateLabel" class="text-[10px] text-blue-600 font-semibold pl-1 hidden block"></span>
+                    </div>
+
+                    <!-- Remark -->
+                    <div class="space-y-1.5 sm:col-span-2">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Remark <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="remark" 
+                            required 
+                            class="input-style" 
+                            placeholder="Additional brief remarks or comments" 
+                        >
+                    </div>
+                </div>
+
+                <!-- Observation Detail Textarea -->
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                        Observation Detail <span class="text-red-500">*</span>
+                    </label>
+                    <textarea 
+                        name="observationDetail" 
+                        required 
+                        rows="3" 
+                        class="input-style resize-none" 
+                        placeholder="Describe the unsafe act, near miss, unsafe condition, or positive observation in clear, precise detail..." 
+                    ></textarea>
+                </div>
+
+                <!-- Recommendation Textarea -->
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                        Recommendation <span class="text-red-500">*</span>
+                    </label>
+                    <textarea 
+                        name="recommendation" 
+                        required 
+                        rows="3" 
+                        class="input-style resize-none" 
+                        placeholder="Submit protective measures, safety actions, or critical suggestions to remedy the issue..." 
+                    ></textarea>
+                </div>
             </div>
 
-            <button type="submit" id="submitBtn" class="w-full bg-slate-900 text-white font-black uppercase tracking-widest py-3 sm:py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-rose-600 transition-all active:scale-[0.98] shadow-lg">
-                <span id="btnText">Submit Report</span>
-                <div id="btnSpinner" class="spinner"></div>
-            </button>
-            <p id="successMsg" class="text-emerald-600 text-center font-bold text-sm hidden">✓ Safety Observation Report submitted successfully</p>
-            <p id="errorMsg" class="text-red-500 text-center font-bold text-xs hidden">✕ Submission failed. Please try again or report directly to HSE team.</p>
+            <!-- Section 3: Involved Parties, Observers & Supervisors -->
+            <div class="space-y-4 pt-2">
+                <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                    <div class="w-5 h-5 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center">
+                        <i data-lucide="user" style="width:14px;height:14px"></i>
+                    </div>
+                    <h3 class="text-xs font-black text-slate-700 uppercase tracking-widest">
+                        3. Personnel, Observers & Contact Info
+                    </h3>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Involved Person -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Involved Person <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="involvedPerson" 
+                            required 
+                            class="input-style" 
+                            placeholder="Name" 
+                        >
+                    </div>
+
+                    <!-- Involved Person Badge No -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-450 uppercase tracking-widest block pl-1">
+                            Involved Person Badge No <span class="text-slate-400 text-[8.5px] font-medium italic">(Optional)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="involvedPersonBadgeNo" 
+                            class="input-style border-slate-200/80" 
+                            placeholder="e.g. 2XXX, GH-XXX, QV-XXXX etc." 
+                        >
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Observer -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Observer (Your Name) <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="observer" 
+                            required 
+                            class="input-style font-medium" 
+                            placeholder="Name" 
+                        >
+                    </div>
+
+                    <!-- Observer Badge No -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-455 uppercase tracking-widest block pl-1">
+                            Observer Badge No <span class="text-slate-400 text-[8.5px] font-medium italic">(Optional)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="observerBadgeNo" 
+                            class="input-style border-slate-200/80" 
+                            placeholder="e.g. 2XXX, GH-XXX, QV-XXXX etc." 
+                        >
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Line Supervisor -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                            Line Supervisor <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="lineSupervisor" 
+                            required 
+                            class="input-style" 
+                            placeholder="Name" 
+                        >
+                    </div>
+
+                    <!-- Line Supervisor Badge No -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-450 uppercase tracking-widest block pl-1">
+                            Line Supervisor Badge No <span class="text-slate-400 text-[8.5px] font-medium italic">(Optional)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="lineSupervisorBadgeNo" 
+                            class="input-style border-slate-200/80" 
+                            placeholder="2XXX, GH-XXX, QV-XXXX etc." 
+                        >
+                    </div>
+
+                    <!-- Mobile No/ Email -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-black text-slate-455 uppercase tracking-widest block pl-1">
+                            Mobile No/ Email <span class="text-slate-400 text-[8.5px] font-medium italic">(Optional)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="contact" 
+                            class="input-style border-slate-200/80" 
+                            placeholder="e.g. +9665XXXXXXXX / email" 
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Safety Officer Verification -->
+            <div class="space-y-4 pt-2 border-t border-slate-100">
+                <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                    <div class="w-5 h-5 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center">
+                        <i data-lucide="shield" style="width:14px;height:14px"></i>
+                    </div>
+                    <h3 class="text-xs font-black text-slate-700 uppercase tracking-widest">
+                        4. Safety Officer Verification
+                    </h3>
+                </div>
+
+                <div class="max-w-xs space-y-1.5">
+                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block pl-1">
+                        Authorization Passcode <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="password" 
+                        name="passcode" 
+                        required 
+                        id="passcodeInput"
+                        class="input-style tracking-widest font-mono text-center" 
+                        placeholder="••••"
+                        maxlength="6"
+                    >
+                    <span id="passcodeErrorLabel" class="text-[10.5px] text-red-500 font-bold pl-1 hidden block">✕ Access Denied: Incorrect safety officer passcode</span>
+                </div>
+            </div>
+
+            <!-- Submission and info -->
+            <div class="pt-2">
+                <button type="submit" id="submitBtn" class="w-full bg-slate-900 text-white font-black uppercase tracking-widest py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-rose-600 transition-all active:scale-[0.98] shadow-lg cursor-pointer">
+                    <span id="btnText">Submit Report</span>
+                    <div id="btnSpinner" class="spinner"></div>
+                </button>
+                <div class="flex gap-2 items-start mt-3 bg-slate-50 border border-slate-200/30 text-[10.5px] text-slate-500 rounded-lg p-2.5">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                    <p>
+                        By submitting this observation form, details are immediately routed to HSE departments for records.
+                    </p>
+                </div>
+            </div>
+
+            <p id="successMsg" class="p-3 bg-emerald-50 border border-emerald-100 rounded-xl text-emerald-700 text-center font-bold text-sm hidden">✓ Safety Observation Report submitted successfully with exact Date & Time encoding!</p>
+            <p id="errorMsg" class="p-3 bg-red-50 border border-red-105 rounded-xl text-red-600 text-center font-bold text-xs hidden">✕ Submission failed. Please verify your connection and resubmit or report directly to the HSE team.</p>
         </form>
     </main>
 
-    <!-- Footer same as previous page -->
+   <!-- Footer same as previous page -->
     <footer class="mt-12 border-t border-slate-200/60 bg-white/30 backdrop-blur-3xl relative z-10 w-full">
         <div class="max-w-7xl mx-auto px-6 py-4 md:py-6">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -328,6 +595,58 @@
         lucide.createIcons();
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHJQaHUcl51hAxo3_xIVpXd4Lf6siqoak7uQCgbiuhSN4dyyq8UucyUjfvrkyb5-w3EA/exec';
 
+        // Date format helpers
+        function formatDateToDdmmyy(dateStr) {
+            if (!dateStr) return '';
+            const dateObj = new Date(dateStr);
+            if (isNaN(dateObj.getTime())) return dateStr;
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const month = months[dateObj.getMonth()];
+            const year = String(dateObj.getFullYear()).slice(-2);
+            return `${day}-${month}-${year}`;
+        }
+
+        const dateInput = document.getElementById('dateInput');
+        const formattedDateLabel = document.getElementById('formattedDateLabel');
+        dateInput.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (val) {
+                formattedDateLabel.textContent = `Formatted to: ${formatDateToDdmmyy(val)}`;
+                formattedDateLabel.classList.remove('hidden');
+            } else {
+                formattedDateLabel.classList.add('hidden');
+            }
+        });
+
+        const targetDateInput = document.getElementById('targetDateInput');
+        const formattedTargetDateLabel = document.getElementById('formattedTargetDateLabel');
+        targetDateInput.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (val) {
+                formattedTargetDateLabel.textContent = `Formatted to: ${formatDateToDdmmyy(val)}`;
+                formattedTargetDateLabel.classList.remove('hidden');
+            } else {
+                formattedTargetDateLabel.classList.add('hidden');
+            }
+        });
+
+        // Color shift for Criticality select
+        const criticalitySelect = document.getElementById('criticalitySelect');
+        criticalitySelect.addEventListener('change', (e) => {
+            const val = e.target.value;
+            criticalitySelect.classList.remove('text-red-600', 'text-orange-500', 'text-yellow-500', 'text-green-600');
+            if (val === 'Critical') {
+                criticalitySelect.classList.add('text-red-600');
+            } else if (val === 'High') {
+                criticalitySelect.classList.add('text-orange-500');
+            } else if (val === 'Medium') {
+                criticalitySelect.classList.add('text-yellow-500');
+            } else if (val === 'Low') {
+                criticalitySelect.classList.add('text-green-600');
+            }
+        });
+
         document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -335,6 +654,15 @@
             const btnText = document.getElementById('btnText');
             const successMsg = document.getElementById('successMsg');
             const errorMsg = document.getElementById('errorMsg');
+            const passcodeVal = e.target.passcode.value;
+            const passcodeErrorLabel = document.getElementById('passcodeErrorLabel');
+
+            if (passcodeVal !== '8876') {
+                passcodeErrorLabel.classList.remove('hidden');
+                return;
+            } else {
+                passcodeErrorLabel.classList.add('hidden');
+            }
 
             btn.disabled = true;
             btnText.style.display = 'none';
@@ -342,60 +670,97 @@
             successMsg.classList.add('hidden');
             errorMsg.classList.add('hidden');
 
-            const eventType = e.target.eventType.value;
-            const informedEmergency = e.target.informedEmergency.value;
-            const userFeedback = e.target.feedback.value;
+            const dateVal = formatDateToDdmmyy(e.target.date.value);
+            const targetDateVal = formatDateToDdmmyy(e.target.targetDate.value);
+            const timeVal = e.target.time.value;
+            const shiftVal = e.target.shift.value;
+            const plantVal = e.target.plant.value;
+            const costCenterVal = e.target.costCenter.value;
+            const locationVal = e.target.location.value;
+            const observationTypeVal = e.target.observationType.value;
+            const observationCategoryVal = e.target.observationCategory.value;
+            const criticalityVal = e.target.criticality.value;
+            const remarkVal = e.target.remark.value;
+            const observationDetailVal = e.target.observationDetail.value;
+            const recommendationVal = e.target.recommendation.value;
+            const involvedPersonVal = e.target.involvedPerson.value;
+            const involvedPersonBadgeNoVal = e.target.involvedPersonBadgeNo.value;
+            const observerVal = e.target.observer.value;
+            const observerBadgeNoVal = e.target.observerBadgeNo.value;
+            const lineSupervisorVal = e.target.lineSupervisor.value;
+            const lineSupervisorBadgeNoVal = e.target.lineSupervisorBadgeNo.value;
+            const contactVal = e.target.contact.value;
 
-            const formData = {
-                // Original legacy keys (for legacy/hardcoded scripts)
-                name: e.target.name.value,
-                badgeNo: e.target.badgeNo.value,
-                designation: e.target.designation.value,
-                projectName: e.target.projectName.value,
-                costCenter: e.target.costCenter.value,
-                eventType: eventType,
-                informedEmergency: informedEmergency,
-                feedback: userFeedback,
-                contact: e.target.contact.value,
+            const submissionData = {
+                "Date": dateVal,
+                "Date (dd-mmm-yy)": dateVal,
+                "Time": timeVal,
+                "Time (24 Hrs or AM/PM)": timeVal,
+                "Shift": shiftVal,
+                "Shift (Day or Night)": shiftVal,
+                "Plant": plantVal,
+                "Cost Center": costCenterVal,
+                "Location": locationVal,
+                "Observation Detail": observationDetailVal,
+                "Involved Person": involvedPersonVal,
+                "Involved Person Badge No": involvedPersonBadgeNoVal,
+                "Recommendation": recommendationVal,
+                "Observation Type": observationTypeVal,
+                "Observation Category": observationCategoryVal,
+                "Criticality": criticalityVal,
+                "Target Date": targetDateVal,
+                "Observer": observerVal,
+                "Observer Badge No": observerBadgeNoVal,
+                "Line Supervisor": lineSupervisorVal,
+                "Line Supervisor Badge No": lineSupervisorBadgeNoVal,
+                "Mobile No/ Email": contactVal,
+                "Remark": remarkVal,
 
-                // Exact column header matches (both standard casing and simple casing)
-                "Type of Event / Observation": eventType,
-                "typeofeventobservation": eventType,
-                "Type": eventType,
-                
-                "Supervisor or Client Emergency Team Notified?": informedEmergency,
-                "supervisororclientemergencyteamnotified?": informedEmergency,
-                "Supervisor or Client Emergency Team Notified": informedEmergency,
-                "Informed Emergency": informedEmergency,
-                "Notified": informedEmergency,
+                // Lowercase versions to ensure compatibility
+                date: dateVal,
+                time: timeVal,
+                shift: shiftVal,
+                plant: plantVal,
+                costCenter: costCenterVal,
+                location: locationVal,
+                observationDetail: observationDetailVal,
+                involvedPerson: involvedPersonVal,
+                involvedPersonBadgeNo: involvedPersonBadgeNoVal,
+                recommendation: recommendationVal,
+                observationType: observationTypeVal,
+                observationCategory: observationCategoryVal,
+                criticality: criticalityVal,
+                targetDate: targetDateVal,
+                observer: observerVal,
+                observerBadgeNo: observerBadgeNoVal,
+                lineSupervisor: lineSupervisorVal,
+                lineSupervisorBadgeNo: lineSupervisorBadgeNoVal,
+                contact: contactVal,
+                remark: remarkVal,
 
-                // Textual description / feedback keys
-                "Feedback & Complaint": userFeedback,
-                "Feedback & Complaints": userFeedback,
-                "Feedback / Complaints": userFeedback,
-                "Description of Safety Observation / Event": userFeedback,
-
-                // Additional human-readable header matches for resilience
-                "Full Name": e.target.name.value,
-                "Name": e.target.name.value,
-                "Badge No": e.target.badgeNo.value,
-                "Badge No.": e.target.badgeNo.value,
-                "Designation": e.target.designation.value,
-                "Project Name": e.target.projectName.value,
-                "Cost Center": e.target.costCenter.value,
-                "Contact Mobile / Email": e.target.contact.value,
-                "Mobile No/ Email": e.target.contact.value
+                // Legacy keys
+                name: observerVal,
+                badgeNo: observerBadgeNoVal,
+                designation: shiftVal,
+                projectName: plantVal,
+                feedback: observationDetailVal
             };
 
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(submissionData)
                 });
                 
                 successMsg.classList.remove('hidden');
                 e.target.reset();
+                formattedDateLabel.classList.add('hidden');
+                formattedTargetDateLabel.classList.add('hidden');
+                passcodeErrorLabel.classList.add('hidden');
+                criticalitySelect.classList.remove('text-red-600', 'text-orange-500', 'text-green-600','text-yellow-500');
+                criticalitySelect.classList.add('text-yellow-500');
+
                 setTimeout(() => { 
                     window.location.href = 'https://kanoozcp.github.io/';
                 }, 3000);
